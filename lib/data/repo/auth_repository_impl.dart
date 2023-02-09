@@ -9,7 +9,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<bool> signUp(String email, String password, String name) async {
 
-   return true;
+   return false;
   }
 
 
