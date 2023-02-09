@@ -1,13 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/domain/bloc/bloc_events.dart';
+import 'package:todo/domain/bloc/bloc_logic.dart';
+import 'package:todo/domain/bloc/bloc_states.dart';
 import 'package:todo/domain/bloc/navigator_bloc.dart';
-import 'package:todo/domain/bloc/sign_in/sign_in_bloc.dart';
-import 'package:todo/domain/bloc/sign_in/sign_in_state.dart';
 
-import 'package:todo/presentation/sign_up.dart';
 
-import '../domain/bloc/sign_in/sign_in_events.dart';
-import 'home_page.dart';
+
+
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -17,15 +18,15 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  late final SignInBloc _signInBloc;
-  late final NavigatorBloc _navigatorBloc;
+  late final MainBloc _MainBloc;
+  late final NavigatorBloc  _navigatorBloc;
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   void didChangeDependencies() {
-    _signInBloc = BlocProvider.of<SignInBloc>(context);
+    _MainBloc = BlocProvider.of<MainBloc>(context);
     _navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
     super.didChangeDependencies();
   }
@@ -51,9 +52,9 @@ class _SignInState extends State<SignIn> {
           ),
         ),
         body: BlocBuilder(
-            bloc: _signInBloc,
+            bloc:  _MainBloc,
             builder: (context, state) {
-              if (state is UserLoadedState) {
+              if (state is UserLogOutState) {
                 return Form(
                   key: _formKey,
                   child: ListView(
@@ -129,24 +130,13 @@ class _SignInState extends State<SignIn> {
                     ],
                   ),
                 );
-              } else if (state is UserLoadingState) {
-                return _loadingIndicator();
-              } else if (state is UserErrorState) {
-                return const Center(
-                  child: Text('Error'),
-                );
               } else if (state is UserLoadedState) {
-                Navigator.pushNamed(context, 'HomePage');
+                _navigatorBloc.add(NavigateToHome());
                 return const Center(
                   child: Text('NONE'),
                 );
-
-              } else if (state is UserGoToSignUpState) {
-                Navigator.pushNamed(context, '/sign_up');
-                return const Center(
-                  child: Text('NONE'),
-                );
-              } else {
+              }
+              else {
                 return const Center(
                   child: Text("None"),
                 );
@@ -157,16 +147,15 @@ class _SignInState extends State<SignIn> {
   Widget _loadingIndicator() {
     return Center(child: Text('Loading...'));
   }
-
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState?.save();
-      _signInBloc
-          .add(SignInEvent(_emailController.text, _passwordController.text));
+      _MainBloc
+          .add(SignInEvent(email: _emailController.text, password: _passwordController.text));
     } else
       print('Form is not valid ');
   }
  void _buttonSignUp(){
-    _signInBloc.add(SignUpEvent());
+   _navigatorBloc.add(NavigateToSignUp());
  }
 }

@@ -18,7 +18,7 @@ class NavigatorBloc extends Bloc<NavigatorEvent, dynamic> {
         navigatorkey.currentState?.pushNamed('/sign_up');
       }
       else if (event is NavigateToHome) {
-        navigatorkey.currentState?.pushNamed('/home');
+        navigatorkey.currentState?.pushNamedAndRemoveUntil('/home', (_) => true);
       }
     }
     );

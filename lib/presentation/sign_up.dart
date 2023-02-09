@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/domain/bloc/sign_up/sign_up_events.dart';
-import 'package:todo/domain/bloc/sign_up/sign_up_states.dart';
-import 'package:todo/presentation/home_page.dart';
-
-
-
+import 'package:todo/domain/bloc/bloc_events.dart';
+import 'package:todo/domain/bloc/bloc_logic.dart';
+import 'package:todo/domain/bloc/bloc_states.dart';
 import '../domain/bloc/navigator_bloc.dart';
-import '../domain/bloc/sign_up/sign_up_bloc.dart';
+
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -17,7 +14,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  late SignUpBloc _signUpBloc;
+  late MainBloc _MainBloc;
   late final NavigatorBloc _navigatorBloc;
   final _formKey = GlobalKey<FormState>();
   final _nameContorller = TextEditingController();
@@ -28,7 +25,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   void didChangeDependencies() {
-    _signUpBloc = BlocProvider.of<SignUpBloc>(context);
+    _MainBloc = BlocProvider.of<MainBloc>(context);
     _navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
     super.didChangeDependencies();
   }
@@ -50,9 +47,9 @@ class _SignUpState extends State<SignUp> {
       appBar: AppBar(title: Text('SignUp'),
       ),
       body: BlocBuilder(
-          bloc: _signUpBloc,
+          bloc: _MainBloc,
           builder: (context, state) {
-            if (state is UserLoadedState) {
+            if (state is UserLogOutState) {
               return Scaffold(
                 appBar: AppBar(
                   title: Text('Sign Ap'),
@@ -61,15 +58,6 @@ class _SignUpState extends State<SignUp> {
                 body: Form(
                   key: _formKey,
                   child: ListView(children: [
-                    TextFormField(
-                      controller: _nameContorller,
-                      decoration: InputDecoration(
-                        labelText: 'Username',
-                        suffixIcon: Icon(Icons.delete_outline),
-                      ),
-                      validator: (val) =>
-                      val!.isEmpty ? 'Name is required' : null,
-                    ),
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
@@ -100,14 +88,9 @@ class _SignUpState extends State<SignUp> {
                   ]),
                 ),
               );
-            } else if (state is UserLoadingState) {
-              return _loadingIndicator();
-            } else if (state is UserErrorState) {
-              return const Center(
-                child: Text('Error'),
-              );
-            } else if (state is UserLoadedState) {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+
+            }  else if (state is UserLoadedState) {
+              _navigatorBloc.add(NavigateToSignUp());
               return const Center(
                 child: Text('NONE'),
               );
@@ -128,8 +111,7 @@ class _SignUpState extends State<SignUp> {
   void _submitFormSignUp() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState?.save();
-      _signUpBloc.add(SignUpEvent(
-        userName: _nameContorller.text,
+      _MainBloc.add(SignUpEvent(
         email: _emailController.text,
         password: _passwordController.text,
       ));
