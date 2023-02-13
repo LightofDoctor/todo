@@ -136,7 +136,7 @@ class _SignInState extends State<SignIn> {
                   child: Text('Error'),
                 );
               } else if (state is UserLoadedState) {
-                Navigator.pushNamed(context, 'HomePage');
+                _navigatorBloc.add(NavigateToHome());
                 return const Center(
                   child: Text('NONE'),
                 );
@@ -162,7 +162,7 @@ class _SignInState extends State<SignIn> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState?.save();
       _signInBloc
-          .add(SignInEvent(_emailController.text, _passwordController.text));
+          .add(SignInEvent(_emailController.text.trim(), _passwordController.text.trim()));
     } else
       print('Form is not valid ');
   }

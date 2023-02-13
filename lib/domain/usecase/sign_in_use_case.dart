@@ -8,5 +8,6 @@ class SignInUseCase {
  SignInUseCase(this.authRepository);
 
   Future<bool> execute(String email, String password) =>
-      authRepository.signIn(email, password);
-}
+   authRepository.signIn(email, password);
+  }
+

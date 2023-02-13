@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/data/repo/auth_repository.dart';
 import 'package:todo/domain/bloc/navigator_bloc.dart';
@@ -11,9 +12,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'data/repo/auth_repository_impl.dart';
 import 'domain/bloc/sign_in/sign_in_bloc.dart';
 import 'domain/usecase/sign_in_use_case.dart';
-
-void main() {
-  runApp(MyApp());
+import 'package:firebase_core/firebase_core.dart';
+Future main() async {
+ WidgetsFlutterBinding.ensureInitialized();
+ await Firebase.initializeApp();
+ runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -31,14 +34,14 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => SignUpBloc(
                 signUpUseCase: SignUpUseCase(
-                  authRepository: AuthRepositoryImpl(),
+                  authRepository: AuthRepositoryImpl(FirebaseAuth.instance), //сюда засунуть FirebaseAuth
                 ),
               ), // Репозиторий + usecase
             ),
             BlocProvider(
                 create: (context) => SignInBloc(
                       navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
-                      signInUseCase: SignInUseCase(AuthRepositoryImpl()),
+                      signInUseCase: SignInUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
                     ))
           ],
           child: MaterialApp(
