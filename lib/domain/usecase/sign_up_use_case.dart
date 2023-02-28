@@ -8,6 +8,6 @@ class SignUpUseCase {
 
   SignUpUseCase({required this.authRepository});
 
-  Future<bool> execute(String email, String password, String name) =>
-      authRepository.signUp(email, password, name);
+  Future<bool> execute(String email, String password,) =>
+      authRepository.signUp(email, password);
 }

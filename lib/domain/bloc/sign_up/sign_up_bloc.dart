@@ -3,15 +3,17 @@ import 'package:todo/domain/bloc/sign_up/sign_up_events.dart';
 import 'package:todo/domain/bloc/sign_up/sign_up_states.dart';
 import 'package:todo/domain/usecase/sign_up_use_case.dart';
 
+import '../navigator_bloc.dart';
+
 class SignUpBloc extends Bloc<UserEvent, UserState> {
   SignUpUseCase signUpUseCase;
+  NavigatorBloc navigatorBloc;
 
-  SignUpBloc({ required this.signUpUseCase}) : super(UserLoadedState()) {
+  SignUpBloc({ required this.signUpUseCase,  required this.navigatorBloc}) : super(UserLoadedState()) {
     on<SignUpEvent>((event, emit) async {
-      emit(UserLoadingState());
       try {
-        final result  = await signUpUseCase.execute(event.userName, event.email, event.password);
-        result ? emit(UserCreatedState()) : emit(UserErrorState());
+        final result  = await signUpUseCase.execute(event.email, event.password);
+        result ? navigatorBloc.add(NavigateToHome()) : emit(UserErrorState());
       } catch (_) {
         emit(UserErrorState());
       }

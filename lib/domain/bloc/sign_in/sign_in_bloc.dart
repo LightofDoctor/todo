@@ -16,8 +16,6 @@ class SignInBloc extends Bloc<UserEvent,UserState> {
       try {
         final result = await signInUseCase.execute(event.email, event.password);
           result ? navigatorBloc.add(NavigateToHome()) : emit(UserErrorState());
-
-        emit(UserLoadedState());
       } catch (_) {
         emit(UserErrorState());
       }

@@ -15,9 +15,11 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<bool> signUp(String email, String password, String name) async {
-
-   return false;
+  Future<bool> signUp(String email, String password) async {
+    final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password);
+      return userCredential.user?.uid != null;
   }
 
   @override

@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) => SignUpBloc(
+                navigatorBloc:  BlocProvider.of<NavigatorBloc>(context),
                 signUpUseCase: SignUpUseCase(
                   authRepository: AuthRepositoryImpl(FirebaseAuth.instance), //сюда засунуть FirebaseAuth
                 ),

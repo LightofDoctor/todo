@@ -54,10 +54,6 @@ class _SignUpState extends State<SignUp> {
           builder: (context, state) {
             if (state is UserLoadedState) {
               return Scaffold(
-                appBar: AppBar(
-                  title: Text('Sign Ap'),
-                  centerTitle: true,
-                ),
                 body: Form(
                   key: _formKey,
                   child: ListView(children: [
@@ -106,12 +102,7 @@ class _SignUpState extends State<SignUp> {
               return const Center(
                 child: Text('Error'),
               );
-            } else if (state is UserLoadedState) {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
-              return const Center(
-                child: Text('NONE'),
-              );
-            } else {
+            }  else {
               return const Center(
                 child: Text('NONE'),
               );
@@ -130,8 +121,8 @@ class _SignUpState extends State<SignUp> {
       _formKey.currentState?.save();
       _signUpBloc.add(SignUpEvent(
         userName: _nameContorller.text,
-        email: _emailController.text,
-        password: _passwordController.text,
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       ));
     } else
       print('Form is not valid ');

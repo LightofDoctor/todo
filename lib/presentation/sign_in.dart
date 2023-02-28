@@ -135,18 +135,8 @@ class _SignInState extends State<SignIn> {
                 return const Center(
                   child: Text('Error'),
                 );
-              } else if (state is UserLoadedState) {
-                _navigatorBloc.add(NavigateToHome());
-                return const Center(
-                  child: Text('NONE'),
-                );
-
-              } else if (state is UserGoToSignUpState) {
-                Navigator.pushNamed(context, '/sign_up');
-                return const Center(
-                  child: Text('NONE'),
-                );
-              } else {
+              }
+              else {
                 return const Center(
                   child: Text("None"),
                 );
