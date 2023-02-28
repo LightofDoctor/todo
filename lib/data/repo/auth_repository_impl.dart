@@ -23,10 +23,22 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<bool> resetPasswordandEmail(String email) {
-
-    throw UnimplementedError();
+  Future<bool> resetPasswordandEmail(String email) async {
+    return true;
   }
+
+  @override
+  Future<bool> deleteAccount() async {
+        final userCredential = await _firebaseAuth.currentUser?.delete();
+      return true;
+  }
+
+  @override
+  Future<bool> logOut() async {
+    final userCredential =  await _firebaseAuth.signOut();
+    return true;
+  }
+
 
 
 

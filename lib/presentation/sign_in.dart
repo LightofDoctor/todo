@@ -4,10 +4,9 @@ import 'package:todo/domain/bloc/navigator_bloc.dart';
 import 'package:todo/domain/bloc/sign_in/sign_in_bloc.dart';
 import 'package:todo/domain/bloc/sign_in/sign_in_state.dart';
 
-import 'package:todo/presentation/sign_up.dart';
+
 
 import '../domain/bloc/sign_in/sign_in_events.dart';
-import 'home_page.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
