@@ -11,7 +11,7 @@ import 'home_page_events.dart';
 class HomePageBloc extends Bloc<UserEvent, UserStates>  {
   NavigatorBloc navigatorBloc;
   LogOutUseCase logOutUseCase;
-  HomePageBloc(this.logOutUseCase, this.navigatorBloc) : super(HomePageLoadedState()){
+  HomePageBloc({ required this.logOutUseCase, required this.navigatorBloc}) : super(HomePageLoadedState()){
     on<LogOutEvent>((event, emit) async {
       try{
       final result =  await logOutUseCase.logOut();

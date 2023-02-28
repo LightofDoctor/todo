@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {},
                     child: Text('DeleteAccount'),
                   ),
-                  Text(signInEvent.email)
+                  Text('Hello')
                 ],
               ));
             } else if (state is ErrorLogOutState) {

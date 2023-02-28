@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/data/repo/auth_repository.dart';
+
+import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
 import 'package:todo/domain/bloc/navigator_bloc.dart';
 import 'package:todo/domain/bloc/sign_up/sign_up_bloc.dart';
+import 'package:todo/domain/usecase/log_out_use_case.dart';
 import 'package:todo/domain/usecase/sign_up_use_case.dart';
-import 'package:todo/presentation/Sign_up.dart';
-import 'package:todo/presentation/home_page.dart';
+
 import 'package:todo/presentation/sign_in.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,7 +44,13 @@ class MyApp extends StatelessWidget {
                 create: (context) => SignInBloc(
                       navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
                       signInUseCase: SignInUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
-                    ))
+                    )),
+            BlocProvider(
+              create: (context) => HomePageBloc(
+                    navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
+                    logOutUseCase: LogOutUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
+              ),
+            )
           ],
           child: MaterialApp(
             navigatorKey: _navigatorKey,
