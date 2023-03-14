@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
 import 'package:todo/domain/bloc/navigator_bloc.dart';
 import 'package:todo/domain/bloc/sign_up/sign_up_bloc.dart';
+import 'package:todo/domain/usecase/delete_account_use_case.dart';
 import 'package:todo/domain/usecase/log_out_use_case.dart';
 import 'package:todo/domain/usecase/sign_up_use_case.dart';
 
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
               create: (context) => HomePageBloc(
                     navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
                     logOutUseCase: LogOutUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
+                    deleteAccountUseCase: DeleteAccountUseCase(AuthRepositoryImpl(FirebaseAuth.instance))
               ),
             )
           ],

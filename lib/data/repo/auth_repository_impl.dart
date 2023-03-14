@@ -24,6 +24,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<bool> resetPasswordandEmail(String email) async {
+    final userCredential = await _firebaseAuth.sendPasswordResetEmail(email: email);
     return true;
   }
 

@@ -8,6 +8,6 @@ class LogOutUseCase{
   LogOutUseCase(this.authRepository);
 
   Future<bool> logOut(){
-    return authRepository.deleteAccount();
+    return authRepository.logOut();
   }
 }

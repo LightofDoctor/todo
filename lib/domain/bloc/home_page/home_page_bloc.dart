@@ -11,7 +11,9 @@ import 'home_page_events.dart';
 class HomePageBloc extends Bloc<UserEvent, UserStates>  {
   NavigatorBloc navigatorBloc;
   LogOutUseCase logOutUseCase;
-  HomePageBloc({ required this.logOutUseCase, required this.navigatorBloc}) : super(HomePageLoadedState()){
+  DeleteAccountUseCase deleteAccountUseCase;
+  HomePageBloc({ required this.logOutUseCase, required this.navigatorBloc , required this.deleteAccountUseCase}) : super(HomePageLoadedState()){
+    emit(HomePageLoadedState());
     on<LogOutEvent>((event, emit) async {
       try{
       final result =  await logOutUseCase.logOut();
@@ -19,7 +21,18 @@ class HomePageBloc extends Bloc<UserEvent, UserStates>  {
     } catch (_) {
       emit(ErrorLogOutState());
     }
-    });
+    }
+    );
+    on<DeleteAccountEvent> ((event, emit) async {
+      try {
+        final result = await deleteAccountUseCase.delAccount();
+        result ? navigatorBloc.add(NavigateToSignIn()) : emit(
+            ErrorDeleteAccountState());
+      } catch (_) {
+        emit(ErrorDeleteAccountState());
+      }
+    }
+    );
   }
 
 }

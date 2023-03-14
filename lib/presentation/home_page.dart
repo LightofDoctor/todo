@@ -45,7 +45,9 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Text('LogOut')),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _delAccount();
+                    },
                     child: Text('DeleteAccount'),
                   ),
                   Text('Hello')
@@ -65,5 +67,8 @@ class _HomePageState extends State<HomePage> {
   }
   _logOut(){
     homePageBloc.add(LogOutEvent());
+  }
+  _delAccount(){
+    homePageBloc.add(DeleteAccountEvent());
   }
 }
