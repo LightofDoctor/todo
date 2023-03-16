@@ -17,12 +17,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late SignInEvent signInEvent;
   late HomePageBloc homePageBloc;
-  late NavigatorBloc _navigatorBloc;
 
   @override
   void didChangeDependencies() {
     homePageBloc = BlocProvider.of<HomePageBloc>(context);
-    _navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
+    homePageBloc.add(FetchUserData());
     super.didChangeDependencies();
   }
 
@@ -48,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {},
                     child: Text('DeleteAccount'),
                   ),
-                  Text('Hello')
+                  Text(state.user != null ? state.user!.email! : 'Hello')
                 ],
               ));
             } else if (state is ErrorLogOutState) {
@@ -63,7 +62,8 @@ class _HomePageState extends State<HomePage> {
           }),
     );
   }
-  _logOut(){
+
+  _logOut() {
     homePageBloc.add(LogOutEvent());
   }
 }
