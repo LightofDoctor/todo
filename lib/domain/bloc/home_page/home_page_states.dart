@@ -1,18 +1,12 @@
-abstract class UserStates{}
+abstract  class HomePageStates {}
 
 
-class LogOutState extends UserStates{}
+class GoToSettings extends HomePageStates{}
 
-class HomePageLoadedState extends UserStates{}
+class LoadedHomePageState extends HomePageStates{}
+class CreateQuestions extends HomePageStates{}
 
-class DeleteAccountState extends UserStates{}
+class ErrorHomePage extends HomePageStates{}
 
+class GoToBackPage extends HomePageStates{}
 
-
-class ErrorLogOutState extends UserStates{
-
-}
-
-class ErrorDeleteAccountState extends UserStates{
-
-}

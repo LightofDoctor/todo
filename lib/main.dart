@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/domain/bloc/Settings_page/Settings_page_bloc.dart';
 
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
 import 'package:todo/domain/bloc/navigator_bloc.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
                       signInUseCase: SignInUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
                     )),
             BlocProvider(
-              create: (context) => HomePageBloc(
+              create: (context) => SettingsPageBloc(
                     navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
                     logOutUseCase: LogOutUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
                     deleteAccountUseCase: DeleteAccountUseCase(AuthRepositoryImpl(FirebaseAuth.instance))

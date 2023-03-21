@@ -1,10 +1,9 @@
-abstract class UserEvent{}
+abstract class HomePageEvents{}
 
 
-class LogOutEvent extends UserEvent{
+class GoToSettingsEvent extends HomePageEvents{}
 
-}
+class CreateQuestionsEvent extends HomePageEvents{}
 
-class DeleteAccountEvent extends UserEvent{
+class GoToBackPageEvent extends HomePageEvents{}
 
-}
