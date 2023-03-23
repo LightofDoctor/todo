@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
  late final HomePageBloc homePageBloc;
   @override
   void didChangeDependencies() {
-
+    homePageBloc = BlocProvider.of<HomePageBloc>(context);
     navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
     super.didChangeDependencies();
   }
@@ -54,7 +54,8 @@ class _HomePageState extends State<HomePage> {
           if( state is LoadedHomePageState){
             return
             ListView(children: [
-              Text('Good')
+
+
 
             ],);
           } else {

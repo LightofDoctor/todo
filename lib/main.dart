@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
               create: (context) => SignUpBloc(
                 navigatorBloc:  BlocProvider.of<NavigatorBloc>(context),
                 signUpUseCase: SignUpUseCase(
-                  authRepository: AuthRepositoryImpl(FirebaseAuth.instance), //сюда засунуть FirebaseAuth
+                  authRepository: AuthRepositoryImpl(FirebaseAuth.instance),
                 ),
               ), // Репозиторий + usecase
             ),
@@ -53,7 +53,10 @@ class MyApp extends StatelessWidget {
                     logOutUseCase: LogOutUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
                     deleteAccountUseCase: DeleteAccountUseCase(AuthRepositoryImpl(FirebaseAuth.instance))
               ),
-            )
+            ),
+            BlocProvider(create: (context) => HomePageBloc(navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
+
+            ))
           ],
           child: MaterialApp(
             navigatorKey: _navigatorKey,
