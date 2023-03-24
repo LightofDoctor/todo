@@ -8,6 +8,11 @@ class CreateQuestion {
     'name': name
   };
 
+  static CreateQuestion fromJson (Map<String, dynamic> json) => CreateQuestion(
+      name: json['name'],
+       id: json['id'],
+
+  );
 }
 
 

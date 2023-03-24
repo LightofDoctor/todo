@@ -6,5 +6,6 @@ abstract class AuthRepository {
   Future<bool> resetPasswordandEmail(String email);
 
   Future<bool> deleteAccount();
- Future<bool> logOut ();
+  Future<bool> logOut ();
+  Future<bool> createQuestions(String question);
 }

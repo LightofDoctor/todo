@@ -1,51 +1,81 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/domain/bloc/create_questions_bloc/create_qestions_states.dart';
+import 'package:todo/domain/bloc/create_questions_bloc/create_questions_bloc.dart';
+
+import '../domain/bloc/create_questions_bloc/create_questions_event.dart';
 import '../domain/bloc/navigator_bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 
-import '../data/models/create_question_model.dart';
 
-class CreateQuestions extends StatelessWidget {
+
+class CreateQuestions extends StatefulWidget {
+  const CreateQuestions({Key? key}) : super(key: key);
+
+  @override
+  State<CreateQuestions> createState() => _CreateQuestionsState();
+}
+
+class _CreateQuestionsState extends State<CreateQuestions> {
   final QuestionController = TextEditingController();
   late final NavigatorBloc navigatorBloc;
+  late final CreateQuestionsBloc createQuestionBloc;
+  @override
+  void didChangeDependencies() {
+    createQuestionBloc = BlocProvider.of<CreateQuestionsBloc>(context);
+    navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
+    super.didChangeDependencies();
+  }
 
-  CreateQuestions({Key? key}) : super(key: key);
+  @override
+  void dispose() {
+    QuestionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:
-            Text('Create Questions', style: TextStyle(color: Colors.black87)),
-        centerTitle: true,
-      ),
-      body: Container(
-        child: Column(
-          children: [
-            TextField(
-                controller: QuestionController,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Create question')),
-            ElevatedButton(
-                onPressed: () {
-                  final question = QuestionController.text;
-                  createQuestions(question: question);
-                },
-                child: Text('Create Question'))
-          ],
+        appBar: AppBar(
+          title:
+          Text('Create Questions', style: TextStyle(color: Colors.black87)),
+          centerTitle: true,
         ),
-      ),
+        body: BlocBuilder(
+
+          bloc:  createQuestionBloc,
+          builder: (context, state){
+            if(state is LoadedQuestionState){
+              return Column(
+                children: [
+                  TextField(
+                      controller: QuestionController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Create question')),
+                  ElevatedButton(
+                      onPressed: () {
+
+                        createQuestions();
+                      },
+                      child: Text('Create Question'))
+                ],
+              );
+
+            } else{
+              return const Center(
+                child: Text("None"),
+              );
+            }
+          },
+        )
     );
+
   }
 
-  Future createQuestions({required String question}) async {
-    final dataQuestion =
-        FirebaseFirestore.instance.collection('Questions').doc();
-
-    final userQuestion = CreateQuestion(name: question, id: dataQuestion.id);
-    final json = userQuestion.toJson();
-
-    await dataQuestion.set(json);
-    navigatorBloc.add(NavigateToHomePage());
+  void createQuestions() {
+    createQuestionBloc.add(CreateQuestionsEvent(QuestionController.text ));
   }
+
 }
+

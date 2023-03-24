@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todo/data/repo/auth_repository.dart';
+
+import '../models/create_question_model.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   final FirebaseAuth _firebaseAuth;
@@ -37,6 +40,15 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<bool> logOut() async {
     final userCredential =  await _firebaseAuth.signOut();
+    return true;
+  }
+
+  @override
+  Future<bool> createQuestions(String question) async {
+    final dataQuestion = FirebaseFirestore.instance.collection('Questions').doc();
+    final userQuestion = CreateQuestion(name: question, id: dataQuestion.id);
+    final json = userQuestion.toJson();
+    await dataQuestion.set(json);
     return true;
   }
 
