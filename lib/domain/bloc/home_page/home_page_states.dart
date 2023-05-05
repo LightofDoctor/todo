@@ -9,4 +9,5 @@ class CreateQuestions extends HomePageStates{}
 class ErrorHomePage extends HomePageStates{}
 
 class GoToBackPage extends HomePageStates{}
+class ReadUsersState extends HomePageStates{}
 

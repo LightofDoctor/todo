@@ -16,6 +16,7 @@ import 'data/repo/auth_repository_impl.dart';
 import 'domain/bloc/create_questions_bloc/create_questions_bloc.dart';
 import 'domain/bloc/sign_in/sign_in_bloc.dart';
 import 'domain/usecase/create_question_use_case.dart';
+import 'domain/usecase/readUsersUseCase.dart';
 import 'domain/usecase/sign_in_use_case.dart';
 import 'package:firebase_core/firebase_core.dart';
 Future main() async {
@@ -56,7 +57,9 @@ class MyApp extends StatelessWidget {
                     deleteAccountUseCase: DeleteAccountUseCase(AuthRepositoryImpl(FirebaseAuth.instance))
               ),
             ),
-            BlocProvider(create: (context) => HomePageBloc(navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
+            BlocProvider(create: (context) => HomePageBloc(
+              navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
+              readUsersUseCase: ReadUsersUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
 
             )
             ),

@@ -23,7 +23,9 @@ class CreateQuestionsBloc extends Bloc<CreateQuestionEvent,CreateQuestionsStates
       }catch(_){
         emit(ErrorQuestionState());
       }
-    });
+    }
+    );
+
 
 
   }

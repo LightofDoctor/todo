@@ -46,10 +46,20 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<bool> createQuestions(String question) async {
     final dataQuestion = FirebaseFirestore.instance.collection('Questions').doc();
-    final userQuestion = CreateQuestion(name: question, id: dataQuestion.id);
+    final userQuestion = Users(name: question, id: dataQuestion.id);
     final json = userQuestion.toJson();
     await dataQuestion.set(json);
     return true;
+  }
+
+  @override
+  Future<Users?> readUsers() async {
+         final docUsers = FirebaseFirestore.instance.collection('Questions').doc();
+         final snapshot = await docUsers.get();
+         if(snapshot.exists){
+           return Users.fromJson(snapshot.data()!);
+         }
+
   }
 
 

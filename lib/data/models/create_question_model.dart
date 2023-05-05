@@ -1,14 +1,14 @@
-class CreateQuestion {
+class Users {
   String id;
   String name;
-  CreateQuestion({ required this.name, this.id= ''});
+  Users({ required this.name, this.id= ''});
 
   Map<String,dynamic> toJson() => {
     'id': id,
     'name': name
   };
 
-  static CreateQuestion fromJson (Map<String, dynamic> json) => CreateQuestion(
+  static Users fromJson (Map<String, dynamic> json) => Users(
       name: json['name'],
        id: json['id'],
 

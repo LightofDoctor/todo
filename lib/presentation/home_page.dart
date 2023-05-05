@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/data/models/create_question_model.dart';
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
 
 import '../domain/bloc/home_page/home_page_events.dart';
@@ -51,17 +52,23 @@ class _HomePageState extends State<HomePage> {
       body: BlocBuilder(
         bloc: homePageBloc,
         builder: (context, state) {
-          if( state is LoadedHomePageState){
+          if( state is ReadUsersState){
             return
-            ListView(children: [
-
-
-
-            ],);
-          } else {
-          return Center(child: Text('Error'),);
-          }
-        },
+            FutureBuilder<Users?>(
+                builder: (context, snapshot){
+                if(snapshot.hasData){
+                  final user = snapshot.data;
+                  return user == null? Center(child: Text('No user'),)
+                      : buildUser(user);
+                }
+                else {
+                  return Center(child: Text('Error'),);
+                }
+          },);
+          } else{
+            return Center(child: Text('ErrorMessage'),);
+            }
+          },
 
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
@@ -70,4 +77,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+  Widget buildUser(Users user) => ListTile(
+    title: Text(user.name),
+  );
 }

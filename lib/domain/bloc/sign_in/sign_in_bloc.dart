@@ -25,6 +25,8 @@ class SignInBloc extends Bloc<UserEvent,UserState> {
     on<SignUpEvent>((event, emit) {
       navigatorBloc.add(NavigateToSignUp());
     });
+
+
   }
 
 
