@@ -20,13 +20,13 @@ class NavigatorBloc extends Bloc<NavigatorEvent, dynamic> {
         navigatorkey.currentState?.pushNamed('/sign_up');
       }
       else if (event is NavigateToSettings) {
-        navigatorkey.currentState?.pushNamed('/Settings');
+        navigatorkey.currentState?.pushNamed('/settings');
       }
       else if (event is NavigateToHomePage){
         navigatorkey.currentState?.pushNamed('/homePage');
       }
       else if (event is NavigateToCreateQuestions){
-        navigatorkey.currentState?.pushNamed('/CreateQuestions');
+        navigatorkey.currentState?.pushNamed('/createQuestions');
       }
     }
     );
@@ -49,8 +49,8 @@ class NavigateToHomePage extends NavigatorEvent{}
 Map<String, Widget Function(BuildContext)> appRouter = {
   '/sign_in': (context) => SignIn(),
   '/sign_up': (context) => SignUp(),
-  '/Settings': (context) => SettingsPage(),
+  '/settings': (context) => SettingsPage(),
   '/homePage': (context) => HomePage(),
-  '/CreateQuestions' : (context) => CreateQuestions(),
+  '/createQuestions' : (context) => CreateQuestionsPage(),
 
 };

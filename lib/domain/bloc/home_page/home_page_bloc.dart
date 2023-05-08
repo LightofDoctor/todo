@@ -12,6 +12,7 @@ class HomePageBloc extends Bloc<HomePageEvents,HomePageStates>{
   HomePageBloc({ required this.navigatorBloc, required this.readUsersUseCase}): super (LoadedHomePageState()){
     emit(LoadedHomePageState());
 
+
     on<GoToSettingsEvent>((event, emit) {
       navigatorBloc.add(NavigateToSettings());
     });
@@ -23,14 +24,20 @@ class HomePageBloc extends Bloc<HomePageEvents,HomePageStates>{
     on<GoToBackPageEvent>((event, emit) {
       navigatorBloc.add(NavigateToSignIn());
     });
-    on<ReadUsersEvent>((event, emit) async {
+    on<ReadUsersEvent>((event, emit) async{
       try{
-        final result = readUsersUseCase.checkreadUsers();
-        emit(ReadUsersState());
-      } catch(_){
-        emit (ErrorHomePage());
+        final result = await readUsersUseCase.checkreadUsers();
+        if(result == null){
+          emit(ErrorHomePage());
+        } else{
+          emit(ReadUsersState());
+        }
+      }catch(a){
+        emit(ErrorHomePage());
+        print(a);
       }
     });
+
   }
 
 

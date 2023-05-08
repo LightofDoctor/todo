@@ -2,17 +2,20 @@
 
 
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/data/models/create_question_model.dart';
+
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
+import 'package:todo/domain/usecase/readUsersUseCase.dart';
 
 import '../domain/bloc/home_page/home_page_events.dart';
 import '../domain/bloc/home_page/home_page_states.dart';
 import '../domain/bloc/navigator_bloc.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+
+   HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -21,6 +24,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
  late final NavigatorBloc navigatorBloc;
  late final HomePageBloc homePageBloc;
+
+ @override
+ void initState(){
+   super.initState();
+   homePageBloc.add(ReadUsersEvent());
+ }
+
+
+
+
+
   @override
   void didChangeDependencies() {
     homePageBloc = BlocProvider.of<HomePageBloc>(context);
@@ -29,7 +43,9 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       appBar: AppBar(
         title: Text('Home',
         style: TextStyle(color:Colors.black87),
@@ -51,33 +67,34 @@ class _HomePageState extends State<HomePage> {
       ),
       body: BlocBuilder(
         bloc: homePageBloc,
-        builder: (context, state) {
-          if( state is ReadUsersState){
-            return
-            FutureBuilder<Users?>(
-                builder: (context, snapshot){
-                if(snapshot.hasData){
-                  final user = snapshot.data;
-                  return user == null? Center(child: Text('No user'),)
-                      : buildUser(user);
-                }
-                else {
-                  return Center(child: Text('Error'),);
-                }
-          },);
-          } else{
-            return Center(child: Text('ErrorMessage'),);
-            }
-          },
+        builder: (BuildContext, state){
+          if(state is ReadUsersState){
+            return ListView.builder(itemBuilder: (context, index){
+              return ListTile(
+                title: Text(state.users[index].name),
+                subtitle: Text(state.users[index].id),
+              );
+            },
+            );
+          } else if (state is ErrorHomePage) {
+    // Handle error
+              return Text("Error: Unable to load users");
+            } else {
 
+                   return CircularProgressIndicator();
+    }
+
+    }
       ),
+
+
+
+
       floatingActionButton: FloatingActionButton(onPressed: () {
           homePageBloc.add(CreateQuestionsEvent());
       },
       ),
     );
   }
-  Widget buildUser(Users user) => ListTile(
-    title: Text(user.name),
-  );
+
 }

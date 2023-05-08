@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 
 
 
-class CreateQuestions extends StatefulWidget {
-  const CreateQuestions({Key? key}) : super(key: key);
+class CreateQuestionsPage extends StatefulWidget {
+  const CreateQuestionsPage({Key? key}) : super(key: key);
 
   @override
-  State<CreateQuestions> createState() => _CreateQuestionsState();
+  State<CreateQuestionsPage> createState() => _CreateQuestionsPageState();
 }
 
-class _CreateQuestionsState extends State<CreateQuestions> {
+class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
   final QuestionController = TextEditingController();
   late final NavigatorBloc navigatorBloc;
   late final CreateQuestionsBloc createQuestionBloc;

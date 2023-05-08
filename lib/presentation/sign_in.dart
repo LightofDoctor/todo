@@ -7,7 +7,7 @@ import 'package:todo/domain/bloc/sign_in/sign_in_state.dart';
 
 
 
-import '../domain/bloc/home_page/home_page_events.dart';
+
 import '../domain/bloc/sign_in/sign_in_events.dart';
 
 class SignIn extends StatefulWidget {
@@ -160,6 +160,5 @@ class _SignInState extends State<SignIn> {
   }
  void _buttonSignUp(){
     _signInBloc.add(SignUpEvent());
-    _homePageBloc.add(ReadUsersEvent());
  }
 }
