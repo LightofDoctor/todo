@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
+import 'package:todo/domain/bloc/home_page/home_page_events.dart';
 import 'package:todo/domain/bloc/navigator_bloc.dart';
 import 'package:todo/domain/bloc/sign_in/sign_in_bloc.dart';
 import 'package:todo/domain/bloc/sign_in/sign_in_state.dart';
@@ -155,10 +156,12 @@ class _SignInState extends State<SignIn> {
       _formKey.currentState?.save();
       _signInBloc
           .add(SignInEvent(_emailController.text.trim(), _passwordController.text.trim()));
+      _homePageBloc.add(ReadUsersEvent());
     } else
       print('Form is not valid ');
   }
  void _buttonSignUp(){
     _signInBloc.add(SignUpEvent());
+
  }
 }

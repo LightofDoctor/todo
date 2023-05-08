@@ -20,8 +20,9 @@ class CreateQuestionsBloc extends Bloc<CreateQuestionEvent,CreateQuestionsStates
       try{
         final result = await createQuestionUseCase.checkCreateQuestion(event.question);
         result ? navigatorBloc.add(NavigateToSignIn()) : emit(ErrorQuestionState());
-      }catch(_){
+      }catch(a){
         emit(ErrorQuestionState());
+        print(a);
       }
     }
     );

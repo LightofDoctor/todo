@@ -59,6 +59,7 @@ class AuthRepositoryImpl extends AuthRepository {
          if(snapshot.exists){
            return Users.fromJson(snapshot.data()!);
          }
+         return null;
 
   }
 

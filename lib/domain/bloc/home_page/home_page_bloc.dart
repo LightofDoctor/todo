@@ -1,5 +1,6 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/data/models/create_question_model.dart';
 
 import '../../usecase/readUsersUseCase.dart';
 import '../navigator_bloc.dart';
@@ -30,7 +31,7 @@ class HomePageBloc extends Bloc<HomePageEvents,HomePageStates>{
         if(result == null){
           emit(ErrorHomePage());
         } else{
-          emit(ReadUsersState());
+          emit(ReadUsersState(users: result as List<Users>));
         }
       }catch(a){
         emit(ErrorHomePage());
