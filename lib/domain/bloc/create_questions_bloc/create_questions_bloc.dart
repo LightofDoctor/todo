@@ -11,7 +11,7 @@ import '../navigator_bloc.dart';
 import 'create_qestions_states.dart';
 import 'create_questions_event.dart';
 
-class CreateQuestionsBloc extends Bloc<CreateQuestionEvent,CreateQuestionsStates>{
+class CreateQuestionsBloc extends Bloc<CreateQuestionEvent,CreateQuestionsState>{
   CreateQuestionUseCase createQuestionUseCase;
   NavigatorBloc navigatorBloc;
   CreateQuestionsBloc({ required this.navigatorBloc,  required this.createQuestionUseCase}) : super (LoadedQuestionState()){

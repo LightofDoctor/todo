@@ -11,8 +11,8 @@ class CreateQuestions extends HomePageStates{}
 class ErrorHomePage extends HomePageStates{}
 
 class GoToBackPage extends HomePageStates{}
-class ReadUsersState extends HomePageStates{
-  final List<Users> users;
-  ReadUsersState({ required this.users});
+class DisplayUsersState extends HomePageStates{
+  final List<Question> users;
+  DisplayUsersState({ required this.users});
 }
 

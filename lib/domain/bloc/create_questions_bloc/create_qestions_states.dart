@@ -1,13 +1,13 @@
 
-abstract class CreateQuestionsStates{}
+abstract class CreateQuestionsState{}
 
 
 
 
-class LoadedQuestionState extends CreateQuestionsStates{
+class LoadedQuestionState extends CreateQuestionsState{
 
 }
 
-class ErrorQuestionState extends CreateQuestionsStates{
+class ErrorQuestionState extends CreateQuestionsState{
 
 }

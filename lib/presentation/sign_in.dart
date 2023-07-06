@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
-import 'package:todo/domain/bloc/home_page/home_page_events.dart';
+
 import 'package:todo/domain/bloc/navigator_bloc.dart';
 import 'package:todo/domain/bloc/sign_in/sign_in_bloc.dart';
 import 'package:todo/domain/bloc/sign_in/sign_in_state.dart';
@@ -9,6 +9,7 @@ import 'package:todo/domain/bloc/sign_in/sign_in_state.dart';
 
 
 
+import '../domain/bloc/home_page/home_page_events.dart';
 import '../domain/bloc/sign_in/sign_in_events.dart';
 
 class SignIn extends StatefulWidget {
@@ -30,6 +31,7 @@ class _SignInState extends State<SignIn> {
   void didChangeDependencies() {
     _signInBloc = BlocProvider.of<SignInBloc>(context);
     _navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
+    _homePageBloc = BlocProvider.of<HomePageBloc>(context);
     super.didChangeDependencies();
   }
 
@@ -156,7 +158,7 @@ class _SignInState extends State<SignIn> {
       _formKey.currentState?.save();
       _signInBloc
           .add(SignInEvent(_emailController.text.trim(), _passwordController.text.trim()));
-      _homePageBloc.add(ReadUsersEvent());
+      _homePageBloc.add(ReadQuestionEvent());
     } else
       print('Form is not valid ');
   }

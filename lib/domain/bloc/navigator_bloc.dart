@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:todo/presentation/sign_in.dart';
 
-import '../../presentation/Settings_page.dart';
+import '../../presentation/settings_page.dart';
 import '../../presentation/Sign_up.dart';
 import '../../presentation/create_questions.dart';
 import '../../presentation/home_page.dart';

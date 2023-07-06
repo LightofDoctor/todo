@@ -10,5 +10,5 @@ abstract class AuthRepository {
   Future<bool> deleteAccount();
   Future<bool> logOut ();
   Future<bool> createQuestions(String question);
-  Future<Users?> readUsers();
+  Future<Question?> readQuestions();
 }

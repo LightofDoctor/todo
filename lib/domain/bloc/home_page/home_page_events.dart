@@ -7,4 +7,4 @@ class CreateQuestionsEvent extends HomePageEvents{}
 
 class GoToBackPageEvent extends HomePageEvents{}
 
-class ReadUsersEvent extends HomePageEvents{}
+class ReadQuestionEvent extends HomePageEvents{}

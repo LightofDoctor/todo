@@ -25,13 +25,14 @@ class HomePageBloc extends Bloc<HomePageEvents,HomePageStates>{
     on<GoToBackPageEvent>((event, emit) {
       navigatorBloc.add(NavigateToSignIn());
     });
-    on<ReadUsersEvent>((event, emit) async{
+    on<ReadQuestionEvent>((event, emit) async{
+      emit(LoadedHomePageState());
       try{
         final result = await readUsersUseCase.checkreadUsers();
         if(result == null){
           emit(ErrorHomePage());
         } else{
-          emit(ReadUsersState(users: result as List<Users>));
+          emit(DisplayUsersState(users: result as List<Question>));
         }
       }catch(a){
         emit(ErrorHomePage());

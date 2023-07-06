@@ -7,7 +7,7 @@ class ReadUsersUseCase{
   ReadUsersUseCase(this.authRepository);
 
 
-  Future<Users?> checkreadUsers(){
-    return authRepository.readUsers();
+  Future<Question?> checkreadUsers() async {
+    return await authRepository.readQuestions();
   }
 }
