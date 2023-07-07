@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:todo/domain/bloc/navigator_bloc.dart';
-import '../domain/bloc/Settings_page/Settings_page_bloc.dart';
+import '../domain/bloc/Settings_page/settings_page_bloc.dart';
 
-import '../domain/bloc/Settings_page/Settings_page_events.dart';
-import '../domain/bloc/Settings_page/Settings_page_states.dart';
+import '../domain/bloc/Settings_page/settings_page_events.dart';
+import '../domain/bloc/Settings_page/settings_page_states.dart';
 import '../domain/bloc/sign_in/sign_in_events.dart';
 
 class SettingsPage extends StatefulWidget {

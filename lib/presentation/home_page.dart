@@ -10,6 +10,8 @@ import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
 import '../domain/bloc/home_page/home_page_events.dart';
 import '../domain/bloc/home_page/home_page_states.dart';
 import '../domain/bloc/navigator_bloc.dart';
+import '../domain/bloc/read_data_users/read_data_users_bloc.dart';
+import '../domain/bloc/read_data_users/read_data_users_states.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -22,12 +24,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late final NavigatorBloc navigatorBloc;
   late final HomePageBloc homePageBloc;
+  late final QuestionListBloc questionListBloc;
 
 
   @override
   void didChangeDependencies() {
     homePageBloc = BlocProvider.of<HomePageBloc>(context);
     navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
+    questionListBloc = BlocProvider.of<QuestionListBloc>(context);
     super.didChangeDependencies();
   }
 
@@ -57,17 +61,17 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: BlocBuilder(
-          bloc: homePageBloc,
+          bloc: questionListBloc,
           builder: (BuildContext, state) {
-                 if (state is LoadedHomePageState) {
+                 if (state is QuestionListLoading) {
                    return Center(child: CircularProgressIndicator());
                  }
-                   if (state is DisplayUsersState) {
-                     final userList = state.users;
+                   if (state is QuestionListLoaded) {
+                     final questionList = state.users;
                        return ListView.builder(
-                         itemCount: userList.length,
+                         itemCount: questionList.length,
                          itemBuilder: (context, index){
-                           final user = userList[index];
+                           final user = questionList[index];
                            return ListTile(
                              title: Text(user.name),
                            );
@@ -75,7 +79,7 @@ class _HomePageState extends State<HomePage> {
 
 
               );
-            } else if (state is ErrorHomePage) {
+            } else if (state is QuestionListError) {
               return Text("Error: Unable to load users");
             } else {
               return CircularProgressIndicator();
