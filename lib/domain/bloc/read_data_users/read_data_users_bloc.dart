@@ -13,7 +13,7 @@ class QuestionListBloc extends Bloc<QuestionListEvents, QuestionListStates>{
     on<GetQuestionList>((event, emit) async {
       emit(QuestionListLoading());
       try{
-        final userList = await readQuestionUseCase.GetUsers();
+        final userList = await readQuestionUseCase.GetQuestions();
         emit(QuestionListLoaded(users: [userList] as List<Question>));
       } catch(a){
         emit(QuestionListError());

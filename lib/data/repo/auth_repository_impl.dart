@@ -55,13 +55,14 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Question?> readQuestions() async {
-         final docUsers = FirebaseFirestore.instance.collection('Questions').doc();
-         final snapshot = await docUsers.get();
-         if(snapshot.exists){
-           return Question.fromJson(snapshot.data()!);
-         }
-         return null;
+  Future<Stream<List<Question>>> readQuestions() async {
+    final docRef = await FirebaseFirestore.instance.collection('Questions')
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => Question.fromJson(doc.data())).toList());
+
+
+    return docRef;
+
 
   }
 

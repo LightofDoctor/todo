@@ -33,6 +33,7 @@ class _SignInState extends State<SignIn> {
   void didChangeDependencies() {
     _signInBloc = BlocProvider.of<SignInBloc>(context);
     _navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
+    _questionListBloc = BlocProvider.of<QuestionListBloc>(context);
 
     super.didChangeDependencies();
   }
