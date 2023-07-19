@@ -7,7 +7,7 @@ class ReadQuestionUseCase{
   ReadQuestionUseCase( this.authRepository);
 
 
-  Future<Stream<List<Question>>> GetQuestions() async {
+    Future<List<Question>>  GetQuestions() async {
     return await authRepository.readQuestions();
   }
 }
