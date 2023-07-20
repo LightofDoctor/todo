@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
                 signUpUseCase: SignUpUseCase(
                   authRepository: AuthRepositoryImpl(FirebaseAuth.instance),
                 ),
-              ), // Репозиторий + usecase
+              ),
             ),
             BlocProvider(
                 create: (context) => SignInBloc(
@@ -71,6 +71,7 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => QuestionListBloc(
+
                   readQuestionUseCase: ReadQuestionUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
               )
             ),

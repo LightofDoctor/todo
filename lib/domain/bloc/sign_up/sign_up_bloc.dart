@@ -17,7 +17,7 @@ class SignUpBloc extends Bloc<UserEvent, UserState> {
         result ? navigatorBloc.add(NavigateToSignIn()) : emit(UserErrorState());
       } catch (a) {
         emit(UserErrorState());
-        print(a);
+
       }
     });
   }

@@ -11,12 +11,12 @@ class QuestionListBloc extends Bloc<QuestionListEvents, QuestionListStates>{
   QuestionListBloc({ required this.readQuestionUseCase}) : super (QuestionsLoadedState()){
     emit(QuestionsLoadedState());
     on<GetQuestionList>((event, emit) async {
-      emit(QuestionListLoading());
       try{
         final userList = await readQuestionUseCase.GetQuestions();
-        emit(QuestionListLoaded(users: [userList] as List<Question>));
+        emit(QuestionListLoaded(userList));
       } catch(a){
         emit(QuestionListError());
+        print(a);
   }
 });
 }

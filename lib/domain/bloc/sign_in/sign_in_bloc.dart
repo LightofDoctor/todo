@@ -19,7 +19,7 @@ class SignInBloc extends Bloc<UserEvent,UserState> {
           result ? navigatorBloc.add(NavigateToHomePage()) : emit(UserErrorState());
       } catch (a) {
         emit(UserErrorState());
-        print(a);
+
       }
     },
     );

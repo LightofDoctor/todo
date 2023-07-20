@@ -10,7 +10,7 @@ class QuestionsLoadedState extends QuestionListStates{}
 
 class QuestionListLoaded extends QuestionListStates{
   final List<Question> users;
-   QuestionListLoaded({ required this.users});
+   QuestionListLoaded(this.users);
 }
 class QuestionListError extends QuestionListStates{
 

@@ -1,21 +1,18 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
 
-
-
 import '../domain/bloc/home_page/home_page_events.dart';
-import '../domain/bloc/home_page/home_page_states.dart';
+
 import '../domain/bloc/navigator_bloc.dart';
 import '../domain/bloc/read_data_users/read_data_users_bloc.dart';
 import '../domain/bloc/read_data_users/read_data_users_states.dart';
 
 class HomePage extends StatefulWidget {
-
-  HomePage({Key? key, }) : super(key: key);
+  HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,7 +22,6 @@ class _HomePageState extends State<HomePage> {
   late final NavigatorBloc navigatorBloc;
   late final HomePageBloc homePageBloc;
   late final QuestionListBloc questionListBloc;
-
 
   @override
   void didChangeDependencies() {
@@ -61,30 +57,29 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: BlocBuilder(
-          bloc: questionListBloc,
-          builder: (BuildContext, state) {
-                 if (state is QuestionListLoading) {
-                   return Center(child: CircularProgressIndicator());
-                 }
-                   if (state is QuestionListLoaded) {
-                     final questionList = state.users;
-                       return ListView.builder(
-                         itemCount: questionList.length,
-                         itemBuilder: (context, index){
-                           final user = questionList[index];
-                           return ListTile(
-                             title: Text(user.name),
-                           );
-                         },
+        bloc: questionListBloc,
+        builder: (context, state) {
 
+        if(state is QuestionListLoaded){
+          final questionList = state.users;
+          return
+          ListView.builder(
+              itemCount: questionList.length,
+              itemBuilder: (context, index) {
+                final user = questionList[index];
+                return ListTile(
+                  title: Text(user.name),
+                  subtitle: Text(user.id),
+                );
+              });
+        }
+        if (state is QuestionListError){
+          return Text('Unable users');
+        }
+        else return CircularProgressIndicator();
+      },
 
-              );
-            } else if (state is QuestionListError) {
-              return Text("Error: Unable to load users");
-            } else {
-              return CircularProgressIndicator();
-            }
-          }),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           homePageBloc.add(CreateQuestionsEvent());
