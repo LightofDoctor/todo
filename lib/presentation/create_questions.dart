@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/data/models/answer_model.dart';
 import 'package:todo/domain/bloc/create_questions_bloc/create_qestions_states.dart';
 import 'package:todo/domain/bloc/create_questions_bloc/create_questions_bloc.dart';
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
@@ -22,6 +23,9 @@ class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
   late final NavigatorBloc navigatorBloc;
   late final CreateQuestionsBloc createQuestionBloc;
   late final HomePageBloc _homePageBloc;
+
+  List<AnswerModel> answers;
+
   @override
   void didChangeDependencies() {
     createQuestionBloc = BlocProvider.of<CreateQuestionsBloc>(context);
@@ -77,8 +81,7 @@ class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
   }
 
   void createQuestions() {
-    createQuestionBloc.add(CreateQuestionsEvent(QuestionController.text ));
-
+    createQuestionBloc.add(CreateQuestionsEvent(QuestionModel()));
   }
 
 }

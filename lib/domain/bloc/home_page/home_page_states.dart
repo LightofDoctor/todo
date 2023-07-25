@@ -1,4 +1,4 @@
-import '../../../data/models/create_question_model.dart';
+import '../../../data/models/question_model.dart';
 
 abstract  class HomePageStates {}
 

@@ -1,6 +1,6 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/data/models/create_question_model.dart';
+import 'package:todo/data/models/question_model.dart';
 
 import '../../usecase/read_questions_use_case.dart';
 import '../navigator_bloc.dart';
