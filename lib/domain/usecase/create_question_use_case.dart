@@ -6,7 +6,7 @@ class CreateQuestionUseCase {
    final AuthRepository authRepository;
    CreateQuestionUseCase(this.authRepository);
 
-   Future<bool> checkCreateQuestion(String question) {
-   return authRepository.createQuestions(question);
+   Future<bool> checkCreateQuestion(String question,List<String> answers) {
+   return authRepository.createQuestions(question,answers);
    }
 }

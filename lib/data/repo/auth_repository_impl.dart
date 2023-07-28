@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todo/data/repo/auth_repository.dart';
 
-import '../models/create_question_model.dart';
+import '../models/questions_model.dart';
 
 
 
@@ -46,9 +46,9 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<bool> createQuestions(String question) async {
+  Future<bool> createQuestions(String question,List<String>answers ) async {
     final dataQuestion = FirebaseFirestore.instance.collection('Questions').doc();
-    final userQuestion = Question(name: question, id: dataQuestion.id);
+    final userQuestion = Question(name: question, id: dataQuestion.id, answers: []);
     final json = userQuestion.toJson();
     await dataQuestion.set(json);
     return true;

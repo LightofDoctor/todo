@@ -1,6 +1,6 @@
 import 'package:todo/data/repo/auth_repository.dart';
 
-import '../../data/models/create_question_model.dart';
+import '../../data/models/questions_model.dart';
 
 class ReadQuestionUseCase{
   final AuthRepository authRepository;

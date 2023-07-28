@@ -18,10 +18,16 @@ class CreateQuestionsPage extends StatefulWidget {
 }
 
 class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
-  final QuestionController = TextEditingController();
+  List<String> items = [];
+  final AskQuestion = TextEditingController();
+  final AnswerQuestionOne = TextEditingController();
+  final AnswerQuestionTwo = TextEditingController();
   late final NavigatorBloc navigatorBloc;
   late final CreateQuestionsBloc createQuestionBloc;
   late final HomePageBloc _homePageBloc;
+
+
+
   @override
   void didChangeDependencies() {
     createQuestionBloc = BlocProvider.of<CreateQuestionsBloc>(context);
@@ -31,7 +37,9 @@ class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
 
   @override
   void dispose() {
-    QuestionController.dispose();
+    AskQuestion.dispose();
+    AnswerQuestionOne.dispose();
+    AnswerQuestionTwo.dispose();
     super.dispose();
   }
 
@@ -48,22 +56,42 @@ class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
           bloc:  createQuestionBloc,
           builder: (context, state){
             if(state is LoadedQuestionState){
-              return Column(
-                children: [
-                  TextField(
-                      controller: QuestionController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Create question')),
-                  ElevatedButton(
-                      onPressed: () {
+              return Form(
+                child: ListView(children: [
+                  const Text('Question'),
+                  const SizedBox(height: 16,),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: 'Ask questions'),
+                    controller: AskQuestion,
 
-                        createQuestions();
+                  ),
+                  const SizedBox(height: 16,),
+                  const Text('Answers'),
+                  const SizedBox(height: 16,),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: 'Add answer'),
+                    controller:  AnswerQuestionOne,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: 'Add answer'),
+                    controller: AnswerQuestionTwo,
+                  ),
+                  ElevatedButton(onPressed: (){
+                    readAnswers();
+                    print(items);
+                  }, child: Text('GO!')),
+                  ElevatedButton(onPressed: (){
+                    createQuestions();
+                  }, child: Text('Write in dataBase'))
 
-                      },
-                      child: Text('Create Question'))
                 ],
-              );
+
+                )
+
+
+
+                ,);
+
 
             } else{
               return const Center(
@@ -77,9 +105,14 @@ class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
   }
 
   void createQuestions() {
-    createQuestionBloc.add(CreateQuestionsEvent(QuestionController.text ));
+    createQuestionBloc.add(CreateQuestionsEvent(AskQuestion.text,items));
 
   }
+    readAnswers(){
+    items.clear();
+    items.add(AnswerQuestionOne.text);
+    items.add(AnswerQuestionTwo.text);
 
+    }
 }
 
