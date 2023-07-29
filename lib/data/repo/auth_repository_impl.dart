@@ -48,7 +48,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<bool> createQuestions(String question,List<String>answers ) async {
     final dataQuestion = FirebaseFirestore.instance.collection('Questions').doc();
-    final userQuestion = Question(name: question, id: dataQuestion.id, answers: []);
+    final userQuestion = Question(name: question, answers: answers);
     final json = userQuestion.toJson();
     await dataQuestion.set(json);
     return true;
