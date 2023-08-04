@@ -17,26 +17,15 @@ class CreateQuestions2Page extends StatefulWidget {
 
 class _CreateQuestions2PageState extends State<CreateQuestions2Page> {
   List<TextEditingController> items = [];
-  final askQuestion = TextEditingController();
-  final answerQuestionOne = TextEditingController();
-  final answerQuestionTwo = TextEditingController();
   late final NavigatorBloc navigatorBloc;
   late final CreateQuestionsBloc createQuestionBloc;
-  late final HomePageBloc _homePageBloc;
 
   @override
   void didChangeDependencies() {
     createQuestionBloc = BlocProvider.of<CreateQuestionsBloc>(context);
     navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
+    addAnswerItem();
     super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    askQuestion.dispose();
-    answerQuestionOne.dispose();
-    answerQuestionTwo.dispose();
-    super.dispose();
   }
 
   @override
@@ -74,32 +63,43 @@ class _CreateQuestions2PageState extends State<CreateQuestions2Page> {
     );
   }
 
-  void addAnswerItem(){
+  void addAnswerItem() {
+    if (items.length >= 10) {
+      return;
+    }
+
     final textEditingController = TextEditingController();
     items.add(textEditingController);
     subscribeToAnswerChanges(textEditingController);
     setState(() {});
   }
 
-  void removeAnswerItem(){
-
+  void removeAnswerItem(TextEditingController textEditingController) {
+    int index = items.indexOf(textEditingController);
+    subscribeToAnswerChanges(items[index-1]);
+    items.removeAt(index);
+    setState(() {});
   }
 
-  void subscribeToAnswerChanges(TextEditingController textEditingController){
+  void subscribeToAnswerChanges(TextEditingController textEditingController) {
     textEditingController.addListener(() {
-      if(textEditingController.text.length > 1){
+      if (textEditingController.text.length > 1) {
         unsubscribeLastTextEditingController(textEditingController);
         addAnswerItem();
+      } else if (textEditingController.text.isEmpty){
+        unsubscribeLastTextEditingController(textEditingController);
+        removeAnswerItem(textEditingController);
       }
     });
   }
 
-  void unsubscribeLastTextEditingController(TextEditingController textEditingController){
+  void unsubscribeLastTextEditingController(
+      TextEditingController textEditingController) {
     textEditingController.dispose();
   }
 
   void createQuestions() {
-    //createQuestionBloc.add(CreateQuestionsEvent(askQuestion.text, items));
+    createQuestionBloc.add(CreateQuestionsEvent("title", items.map((element) => element.text).toList()));
   }
 
   readAnswers() {
