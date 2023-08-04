@@ -19,9 +19,9 @@ class CreateQuestionsPage extends StatefulWidget {
 
 class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
   List<String> items = [];
-  final AskQuestion = TextEditingController();
-  final AnswerQuestionOne = TextEditingController();
-  final AnswerQuestionTwo = TextEditingController();
+  final askQuestion = TextEditingController();
+  final answerQuestionOne = TextEditingController();
+  final answerQuestionTwo = TextEditingController();
   late final NavigatorBloc navigatorBloc;
   late final CreateQuestionsBloc createQuestionBloc;
   late final HomePageBloc _homePageBloc;
@@ -37,9 +37,9 @@ class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
 
   @override
   void dispose() {
-    AskQuestion.dispose();
-    AnswerQuestionOne.dispose();
-    AnswerQuestionTwo.dispose();
+    askQuestion.dispose();
+    answerQuestionOne.dispose();
+    answerQuestionTwo.dispose();
     super.dispose();
   }
 
@@ -62,7 +62,7 @@ class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
                   const SizedBox(height: 16,),
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'Ask questions'),
-                    controller: AskQuestion,
+                    controller: askQuestion,
 
                   ),
                   const SizedBox(height: 16,),
@@ -70,11 +70,11 @@ class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
                   const SizedBox(height: 16,),
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'Add answer'),
-                    controller:  AnswerQuestionOne,
+                    controller:  answerQuestionOne,
                   ),
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'Add answer'),
-                    controller: AnswerQuestionTwo,
+                    controller: answerQuestionTwo,
                   ),
                   ElevatedButton(onPressed: (){
                     readAnswers();
@@ -105,14 +105,14 @@ class _CreateQuestionsPageState extends State<CreateQuestionsPage> {
   }
 
   void createQuestions() {
-    createQuestionBloc.add(CreateQuestionsEvent(AskQuestion.text,items));
+    createQuestionBloc.add(CreateQuestionsEvent(askQuestion.text,items));
 
   }
-    readAnswers(){
-    items.clear();
-    items.add(AnswerQuestionOne.text);
-    items.add(AnswerQuestionTwo.text);
 
-    }
+  readAnswers() {
+    items.clear();
+    items.add(answerQuestionOne.text);
+    items.add(answerQuestionTwo.text);
+  }
 }
 
