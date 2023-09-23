@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/domain/bloc/Settings_page/settings_page_bloc.dart';
 
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
 import 'package:todo/domain/bloc/navigator_bloc.dart';
@@ -12,7 +13,11 @@ import 'package:todo/presentation/sign_in.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'data/repo/auth_repository_impl.dart';
+import 'domain/bloc/create_questions_bloc/create_questions_bloc.dart';
+import 'domain/bloc/read_data_users/read_data_users_bloc.dart';
 import 'domain/bloc/sign_in/sign_in_bloc.dart';
+import 'domain/usecase/create_question_use_case.dart';
+import 'domain/usecase/read_questions_use_case.dart';
 import 'domain/usecase/sign_in_use_case.dart';
 import 'package:firebase_core/firebase_core.dart';
 Future main() async {
@@ -37,9 +42,9 @@ class MyApp extends StatelessWidget {
               create: (context) => SignUpBloc(
                 navigatorBloc:  BlocProvider.of<NavigatorBloc>(context),
                 signUpUseCase: SignUpUseCase(
-                  authRepository: AuthRepositoryImpl(FirebaseAuth.instance), //сюда засунуть FirebaseAuth
+                  authRepository: AuthRepositoryImpl(FirebaseAuth.instance),
                 ),
-              ), // Репозиторий + usecase
+              ),
             ),
             BlocProvider(
                 create: (context) => SignInBloc(
@@ -47,12 +52,29 @@ class MyApp extends StatelessWidget {
                       signInUseCase: SignInUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
                     )),
             BlocProvider(
-              create: (context) => HomePageBloc(
+              create: (context) => SettingsPageBloc(
                     navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
                     logOutUseCase: LogOutUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
                     deleteAccountUseCase: DeleteAccountUseCase(AuthRepositoryImpl(FirebaseAuth.instance))
               ),
+            ),
+            BlocProvider(create: (context) => HomePageBloc(
+              navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
+
             )
+            ),
+            BlocProvider(
+                create: (context) => CreateQuestionsBloc(
+              navigatorBloc: BlocProvider.of<NavigatorBloc>(context),
+                createQuestionUseCase: CreateQuestionUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
+            )
+            ),
+            BlocProvider(
+              create: (context) => QuestionListBloc(
+
+                  readQuestionUseCase: ReadQuestionUseCase(AuthRepositoryImpl(FirebaseAuth.instance)),
+              )
+            ),
           ],
           child: MaterialApp(
             navigatorKey: _navigatorKey,
