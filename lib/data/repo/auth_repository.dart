@@ -1,3 +1,4 @@
+import '../models/answer_model.dart';
 import '../models/questions_model.dart';
 
 abstract class AuthRepository {
@@ -9,6 +10,6 @@ abstract class AuthRepository {
 
   Future<bool> deleteAccount();
   Future<bool> logOut ();
-  Future<bool> createQuestions(String question, List<String> answers);
+  Future<bool> createQuestions(Question question,);
   Future<List<Question>> readQuestions();
 }

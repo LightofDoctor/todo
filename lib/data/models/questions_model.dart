@@ -1,8 +1,10 @@
+import 'answer_model.dart';
+
 class Question {
   String id;
   String name;
   List<String> answers;
-  Question({ required this.name, this.id= '', required this.answers});
+  Question({ required this.name,required this.id, required this.answers});
 
   Map<String,dynamic> toJson() => {
     'id': id,
