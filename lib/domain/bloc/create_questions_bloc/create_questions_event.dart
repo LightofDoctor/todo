@@ -11,6 +11,6 @@ class WriteToFirebaseEvent extends CreateQuestionEvent{
 }
 class AddAnswerEvent extends CreateQuestionEvent{
 
-  final List<String> answers;
+  final List<Answers> answers;
   AddAnswerEvent(this.answers);
 }

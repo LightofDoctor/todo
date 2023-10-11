@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/data/models/questions_model.dart';
 
 import 'package:todo/domain/bloc/home_page/home_page_bloc.dart';
 
@@ -61,15 +62,20 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
 
         if(state is QuestionListLoaded){
-          final questionList = state.users;
+          final questionList = state.questions;
           return
           ListView.builder(
               itemCount: questionList.length,
               itemBuilder: (context, index) {
-                final user = questionList[index];
+                final question = questionList[index];
                 return ListTile(
-                  title: Text(user.name),
-                  subtitle: Text(user.id),
+                  title: Text(question.name),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      question.answers as Widget
+                    ],
+                  ),
 
                 );
               });
@@ -88,4 +94,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+
 }
+
