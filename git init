@@ -1,0 +1,242 @@
+[33mcommit e1a8f5d175b9e20db6da5c03c80f227a41aeda58[m[33m ([m[1;36mHEAD -> [m[1;32mcreat_questions_add_answers[m[33m)[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Wed Oct 11 19:47:52 2023 +0300
+
+    add listAnswers, addQuestion
+
+[33mcommit fba24c7e135a94d79baac045f9ca942d69135f37[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Wed Oct 11 19:47:45 2023 +0300
+
+    add listAnswers, addQuestion
+
+[33mcommit b5f1525153a1a6ea2f59353224d46ff2a6d42d7b[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Tue Oct 3 21:14:29 2023 +0300
+
+    created addAnswer
+
+[33mcommit ceeb80d6621dd3b5d2718f39d21517a9eaaca070[m[33m ([m[1;31morigin/creat_questions_add_answers[m[33m)[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Sat Jul 29 14:45:04 2023 +0300
+
+    write list answers to dataBase
+
+[33mcommit 6cff6c54b242fdea13e40950582859562b4f91b8[m[33m ([m[1;32mCreate_questions[m[33m)[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Fri Jul 28 20:09:58 2023 +0300
+
+    create Form for Questions
+
+[33mcommit 4c5602132eef781f6e5f21df0608f424a6d2bf3b[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Thu Jul 20 14:25:43 2023 +0300
+
+    readQuestions in dataBase
+
+[33mcommit 9b87055b3b3c1cc84404e533e9ab1de23af631e8[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Wed Jul 19 11:38:46 2023 +0300
+
+    return ListQuestions(change)
+
+[33mcommit f4d51af3b69cafb30299a9666e92d7e2d3a56f29[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Wed Jul 12 14:14:29 2023 +0300
+
+    return ListQuestions
+
+[33mcommit e11e604bd6856d038abb055e407d555c91575e0b[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Fri Jul 7 15:39:08 2023 +0300
+
+    second way ReadDataQuestion
+
+[33mcommit 28c2fe268b2b7805900146092893273a71992f02[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Fri Jul 7 15:38:58 2023 +0300
+
+    second way ReadDataQuestion
+
+[33mcommit 79b84a01f95089af1778f827e1051e496e33c8ba[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Thu Jul 6 14:53:43 2023 +0300
+
+    make readDataUsers
+
+[33mcommit 6f7f33742016cb1336bd0f053b4e1a22d51b820f[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Mon May 8 15:18:35 2023 +0300
+
+    Add readUsersList
+
+[33mcommit 035a653c957cdc76ba4a4a7e74a5e65fcb5836f3[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Mon May 8 12:57:42 2023 +0300
+
+    Add ListView.builder
+
+[33mcommit 25119e9bd30e8ccd2b2bcaf2333c43173f67d9f2[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Fri May 5 14:48:52 2023 +0300
+
+    Add readUsers method from FireBase
+
+[33mcommit 09fc508a83e663f718e20027e968b4147db1d29f[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Fri May 5 14:47:43 2023 +0300
+
+    Add readUsers method from FireBase
+
+[33mcommit f5c051e4b534d7d993c8e3aa8ffc29ce3e18555d[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Fri Mar 24 13:40:44 2023 +0200
+
+    Add CreateQuestionBloc
+
+[33mcommit 5c3c5dd93685a9eda5624b37c1b3eb9202616905[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Thu Mar 23 13:50:19 2023 +0200
+
+    Craated dataQuestion
+
+[33mcommit e857139ac5d092f8f7b43bcea96de2982cf66e48[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Tue Mar 21 15:13:07 2023 +0200
+
+    Craated two Page+ details
+
+[33mcommit a4935f7ff7d23aefc89dee10ba340f3289bbc2c8[m[33m ([m[1;31morigin/DP-3_finish[m[33m, [m[1;32mDP-3_finish[m[33m)[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Tue Mar 14 18:30:48 2023 +0200
+
+    delAccount created, logOut created
+
+[33mcommit 74aa4fee10f0c1d447f1d61233a79fa0ed4643d6[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Tue Feb 28 17:17:13 2023 +0200
+
+    Log Out created
+
+[33mcommit 7220a19590f44e473fe39f7859b44f64df951d62[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Tue Feb 28 17:04:32 2023 +0200
+
+    Log Out
+
+[33mcommit 528f54c87952b2c2ca78d0ba49ea35a300a48405[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Tue Feb 28 11:30:21 2023 +0200
+
+    link fire base, sign_up + check password
+
+[33mcommit 2604c90e2312403cdc141dd4ccbdb8be4a1b4c6b[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Mon Feb 13 11:45:10 2023 +0200
+
+    link fire base
+
+[33mcommit c427f705b36b4ec1f1a06bf33b0915fc7893a6fd[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Thu Feb 9 21:17:16 2023 +0200
+
+    redddffghnjkl
+
+[33mcommit 0d095bfe90ade0ff1846a198cac097328965fa28[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Mon Dec 5 18:52:23 2022 +0200
+
+    create button Sign Up, UserGoToSignUpState, emit UserGoToSignUpState in SignInBloc
+
+[33mcommit 5891755f40c78418047bb920590e376cdb9e9b31[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Mon Dec 5 16:32:39 2022 +0200
+
+    create auth_repository impl, navigator_bloc.dart
+
+[33mcommit 66211bdf713f2e1db24ea1b5467f577d223dfe27[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Tue Nov 29 16:41:48 2022 +0200
+
+    create BlocProvider, UseCase2, AuthRepository2, BlocProvider
+
+[33mcommit b06f418e33129c9ff0b8fe99dd4216a2791182ff[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Mon Nov 28 22:23:54 2022 +0200
+
+    create BlocProvider, UseCase2, AuthRepository2, BlocProvider
+
+[33mcommit 0eee28313eb5d5c82eb7eeb963e12d88be0ed4fe[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Tue Nov 22 12:21:57 2022 +0200
+
+    create Bloc, Form, Provider, BlocBuilder
+
+[33mcommit 7d91eaccfbfa0915a9a0ad64448d90cb65e65e43[m
+Author: martynovb <martynov.bohdan@gmail.com>
+Date:   Mon Nov 21 20:52:20 2022 +0200
+
+    change sign up
+
+[33mcommit ad10e6217173e9a2297b0670dce40c88f82a5963[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Mon Nov 21 19:35:38 2022 +0200
+
+    create Bloc, Form, Provider, BlocBuilder
+
+[33mcommit 23082b4f51d10e193c4532b1657c98e7d3c1ccf1[m
+Author: Bohdan Martynov <“bohdan.martynov@medtronic.com”>
+Date:   Wed Nov 16 16:06:45 2022 +0200
+
+    base architecture
+
+[33mcommit 9c21531913ee2130bf1fa41c21bbf9b8c4febfe2[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Wed Nov 16 15:05:40 2022 +0200
+
+    create Bloc, model_info, use.case
+
+[33mcommit 79caff9ce85479e51d739238995dabc022c9a630[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Mon Nov 14 15:18:26 2022 +0200
+
+    create Bloc, model_info, use.case
+
+[33mcommit caca347411695b6e86d547e9930558d42a8075e4[m
+Merge: 91b18b8 0a1ec97
+Author: Kulakov <48257431+LightofDoctor@users.noreply.github.com>
+Date:   Mon Nov 14 12:03:25 2022 +0200
+
+    Merge pull request #2 from martynovb/DP-3-implement-sing-in-login-screen
+    
+    Dp 3 implement sing in login screen
+
+[33mcommit 0a1ec975a7e6455d769dd1b378c664676aba4f16[m[33m ([m[1;31morigin/DP-3-implement-sing-in-login-screen[m[33m, [m[1;32mDP-3-implement-sing-in-login-screen[m[33m)[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Sun Nov 13 20:20:13 2022 +0200
+
+    commit
+
+[33mcommit 2ec63bb04b43e68a4d9f142bfa925565535fd845[m
+Author: Kulakov <lightofdoctor@gmail.com>
+Date:   Thu Nov 10 10:33:14 2022 +0200
+
+    commit
+
+[33mcommit 91b18b830fdfbe541969c65f8e8ca66e1f66c93e[m
+Author: martynovb <martynov.bohdan@gmail.com>
+Date:   Wed Nov 9 10:49:48 2022 +0200
+
+    initial commit
+
+[33mcommit 30463828a22e2e4f246ec4ddbf58b335d4b1c82e[m
+Author: martynovb <martynov.bohdan@gmail.com>
+Date:   Wed Nov 9 10:40:36 2022 +0200
+
+    initial commit
+
+[33mcommit 98222f0f25fa03fe1de1f73fd2d13a9269915cee[m
+Author: Bohdan Martynov <48797124+martynovb@users.noreply.github.com>
+Date:   Wed Nov 9 07:31:11 2022 +0000
+
+    Initial commit
