@@ -71,6 +71,7 @@ class _SignInState extends State<SignIn> {
                         height: 100,
                       ),
                       TextFormField(
+                        key: Key('emailTextField'),
                         controller: _emailController,
                         decoration: InputDecoration(
                             labelText: 'Email',
@@ -80,6 +81,7 @@ class _SignInState extends State<SignIn> {
                             val!.isEmpty ? 'Name is required' : null,
                       ),
                       TextFormField(
+                        key: Key('passwordTextField'),
                         controller: _passwordController,
                         decoration: InputDecoration(
                           labelText: 'Password',
@@ -106,6 +108,7 @@ class _SignInState extends State<SignIn> {
                         height: 10,
                       ),
                       ElevatedButton(
+                        key: Key('signInButton'),
                         style: ElevatedButton.styleFrom(
                             primary: Colors.yellow.shade600),
                         onPressed: () {
