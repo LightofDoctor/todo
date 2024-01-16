@@ -58,101 +58,109 @@ class _SignInState extends State<SignIn> {
                 color: Colors.lightBlue.shade900),
           ),
         ),
-        body: BlocBuilder(
-            bloc: _signInBloc,
-            builder: (context, state) {
-              if (state is UserLoadedState) {
-                return Form(
-                  key: _formKey,
-                  child: ListView(
-                    padding: EdgeInsets.all(20.0),
-                    children: [
-                      SizedBox(
-                        height: 100,
-                      ),
-                      TextFormField(
-                        key: Key('emailTextField'),
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                            labelText: 'Email',
-                            suffixIcon: Icon(Icons.delete_outline)),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (val) =>
-                            val!.isEmpty ? 'Name is required' : null,
-                      ),
-                      TextFormField(
-                        key: Key('passwordTextField'),
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          suffixIcon: Icon(Icons.delete_outline),
+        body: GestureDetector(
+          onTap: (){
+            FocusScope.of(context).unfocus();
+          },
+          child: BlocBuilder(
+              bloc: _signInBloc,
+              builder: (context, state) {
+                if (state is UserLoadedState) {
+                  return Form(
+                    key: _formKey,
+                    child: ListView(
+                      padding: EdgeInsets.all(20.0),
+                      children: [
+                        SizedBox(
+                          height: 100,
                         ),
-                        keyboardType: TextInputType.multiline,
-                        validator: (val) =>
-                            val!.isEmpty ? 'Please check password' : null,
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Forgot Password?',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontStyle: FontStyle.normal,
-                                  color: Colors.blue.shade900))
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ElevatedButton(
-                        key: Key('signInButton'),
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.yellow.shade600),
-                        onPressed: () {
-                          _submitForm();
-                        },
-                        child: Text('Sign in',
-                            style: TextStyle(
-                                fontSize: 18,
-
-                                color: Colors.black,
-                                fontStyle: FontStyle.italic)
+                        TextFormField(
+                          key: Key('EmailTextField'),
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                              labelText: 'Email',
+                              suffixIcon: Icon(Icons.delete_outline)),
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (val) =>
+                              val!.isEmpty ? 'Name is required' : null,
                         ),
-                      ),
-                      SizedBox(height: 8,),
-                      Row(children: [
-                        Text('Do not have an account?'),
-                        Container(
-                          padding: EdgeInsets.all(15),
-                          child:
-                          ElevatedButton(onPressed: () {
-                            _buttonSignUp();
+                        TextFormField(
+                          key: Key('PasswordTextField'),
+                          controller: _passwordController,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            suffixIcon: Icon(Icons.delete_outline),
+                          ),
+                          keyboardType: TextInputType.text,
+                          validator: (val) =>
+                              val!.isEmpty ? 'Please check password' : null,
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Forgot Password?',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.normal,
+                                    color: Colors.blue.shade900))
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        ElevatedButton(
+                          key: Key('SignInButton'),
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.yellow.shade600),
+                          onPressed: () {
+                            _submitForm();
                           },
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white),
-                            child:  Text('Sign UP ', style: TextStyle( color: Colors.blue.shade900,)),)
-                          ,
+                          child: Text('Sign in',
+                              style: TextStyle(
+                                  fontSize: 18,
+          
+                                  color: Colors.black,
+                                  fontStyle: FontStyle.italic)
+                          ),
                         ),
-                      ],)
-                    ],
-                  ),
-                );
-              } else if (state is UserLoadingState) {
-                return _loadingIndicator();
-              } else if (state is UserErrorState) {
-                return const Center(
-                  child: Text('Error'),
-                );
-              }
-              else {
-                return const Center(
-                  child: Text("None"),
-                );
-              }
-            }));
+                        SizedBox(height: 8,),
+                        Row(children: [
+                          Text('Do not have an account?'),
+                          Container(
+                            padding: EdgeInsets.all(15),
+                            child:
+                            ElevatedButton(
+                              key: Key('SignUpButton'),
+                              onPressed: () {
+          
+                                _buttonSignUp();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.white),
+                              child:  Text('Sign UP ', style: TextStyle( color: Colors.blue.shade900,)),)
+                            ,
+                          ),
+                        ],)
+                      ],
+                    ),
+                  );
+                } else if (state is UserLoadingState) {
+                  return _loadingIndicator();
+                } else if (state is UserErrorState) {
+                  return const Center(
+                    child: Text('Error'),
+                  );
+                }
+                else {
+                  return const Center(
+                    child: Text("None"),
+                  );
+                }
+              }),
+        ));
   }
 
   Widget _loadingIndicator() {
@@ -165,7 +173,7 @@ class _SignInState extends State<SignIn> {
       _signInBloc
           .add(SignInEvent(_emailController.text.trim(), _passwordController.text.trim()));
     _questionListBloc.add(GetQuestionList());
-
+     
     } else
       print('Form is not valid ');
   }

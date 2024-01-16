@@ -58,7 +58,7 @@ class _SignUpState extends State<SignUp> {
                   key: _formKey,
                   child: ListView(children: [
                     TextFormField(
-                      key: Key('nameTextField'),
+
                       controller: _nameContorller,
                       decoration: InputDecoration(
                         labelText: 'Username',
@@ -68,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                       val!.isEmpty ? 'Name is required' : null,
                     ),
                     TextFormField(
-                      key: Key('emailTextField'),
+
                       controller: _emailController,
                       decoration: InputDecoration(
                           labelText: 'Email',
@@ -77,7 +77,7 @@ class _SignUpState extends State<SignUp> {
                       val!.isEmpty ? 'Name is required' : null,
                     ),
                     TextFormField(
-                      key: Key('passwordTextField'),
+
                       controller: _passwordController,
                       decoration: InputDecoration(
                           labelText: 'password',
@@ -92,7 +92,7 @@ class _SignUpState extends State<SignUp> {
                       validator: _validatePassword,
                     ),
                     ElevatedButton(
-                        key: Key('signUpButton'),
+
                         onPressed: () {
                           _submitFormSignUp();
                         },
