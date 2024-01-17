@@ -31,13 +31,17 @@ class _SignInState extends State<SignIn> {
 
   @override
   void didChangeDependencies() {
-    _signInBloc = BlocProvider.of<SignInBloc>(context);
-    _navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
-    _questionListBloc = BlocProvider.of<QuestionListBloc>(context);
+    if (!initialized) {
+      _signInBloc = BlocProvider.of<SignInBloc>(context);
+      _navigatorBloc = BlocProvider.of<NavigatorBloc>(context);
+      _questionListBloc = BlocProvider.of<QuestionListBloc>(context);
+      initialized = true;
+    }
 
     super.didChangeDependencies();
   }
 
+  bool initialized = false;
   @override
   void dispose() {
     _emailController.dispose();
