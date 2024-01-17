@@ -1,12 +1,16 @@
 
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import 'package:todo/domain/bloc/navigator_bloc.dart';
 import 'package:todo/domain/bloc/read_data_users/read_data_users_bloc.dart';
 import 'package:todo/domain/bloc/sign_in/sign_in_bloc.dart';
+import 'package:todo/domain/bloc/sign_in/sign_in_state.dart';
 import 'package:todo/domain/usecase/read_questions_use_case.dart';
 
 
@@ -25,11 +29,14 @@ void main(){
   late MockNavigatorBloc navigatorBloc;
   late MockSignInUseCase signInUseCase;
   late QuestionListBloc questionListBloc;
+  late ReadQuestionUseCase readQuestionUseCase;
   late SignInBloc signInBloc;
+
    setUp(() {
+     readQuestionUseCase = MockReadQuestionUseCase();
      navigatorBloc = MockNavigatorBloc();
      signInUseCase = MockSignInUseCase();
-
+     questionListBloc = QuestionListBloc(readQuestionUseCase: readQuestionUseCase);
      signInBloc = SignInBloc(navigatorBloc: navigatorBloc, signInUseCase: signInUseCase);
      
    });
@@ -44,6 +51,9 @@ void main(){
             BlocProvider<NavigatorBloc>(
               create: (context) => navigatorBloc,
             ),
+            BlocProvider(
+                create: (context) => questionListBloc
+            )
           ],
           child: SignIn(),
         ),
@@ -55,6 +65,34 @@ void main(){
     expect(find.byKey(Key('SignInButton')), findsOneWidget);
     expect(find.byKey(Key('SignUpButton')), findsOneWidget);
   });
+  testWidgets('Tap on button', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider<SignInBloc>(
+              create: (context) => signInBloc,
+            ),
+            BlocProvider<NavigatorBloc>(
+              create: (context) => navigatorBloc,
+            ),
+            BlocProvider(
+                create: (context) => questionListBloc
+            )
+          ],
+          child: SignIn(),
+        ),
+      ),
+    );
+
+
+    await tester.tap(find.byKey(Key('SignUpButton')));
+    await tester.pump();
+    expect(find.byType(TextFormField), findsWidgets);
+
+
+  });
+
 
   tearDown(() {
     signInBloc.close();
