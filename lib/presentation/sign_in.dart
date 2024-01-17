@@ -151,6 +151,7 @@ class _SignInState extends State<SignIn> {
                       ],
                     ),
                   );
+
                 } else if (state is UserLoadingState) {
                   return _loadingIndicator();
                 } else if (state is UserErrorState) {

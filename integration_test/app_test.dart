@@ -12,7 +12,7 @@ class MockQuestionBloc extends Mock implements QuestionListBloc {}
 void main() {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-    testWidgets('Test SignInScrean', (WidgetTester tester) async {
+    testWidgets('Test SignInScreen', (WidgetTester tester) async {
         MyApp.main(
 
         );
@@ -30,8 +30,8 @@ void main() {
         await tester.pumpAndSettle(Duration(seconds: 3));
         await tester.tapAt(Offset(200, 100));
         await tester.pumpAndSettle(Duration(seconds: 5));
-        await tester.tap(find.byKey(Key('SignInButton')));
+        await tester.tap(find.byKey(Key('SignUpButton')));
         await tester.pumpAndSettle(Duration(seconds: 3));
-
+        expect(find.byType(TextFormField), findsWidgets);
     });
 }

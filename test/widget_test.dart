@@ -1,31 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo/main.dart';
+import 'package:mockito/mockito.dart';
+import 'package:todo/domain/bloc/navigator_bloc.dart';
+import 'package:todo/domain/bloc/sign_in/sign_in_bloc.dart';
+import 'package:todo/domain/bloc/sign_in/sign_in_events.dart';
+import 'package:todo/domain/usecase/sign_in_use_case.dart';
+import 'package:todo/presentation/sign_in.dart';
+
+class MockSignInBloc extends Mock implements SignInBloc {}
+
+class MockNavigatorBloc extends Mock implements NavigatorBloc {}
+class MockSignInUseCase extends Mock implements SignInUseCase {}
 
 void main() {
-  testWidgets('Widget Test: SignIn Widget', (WidgetTester tester) async {
+  TestWidgetsFlutterBinding.ensureInitialized();
 
-    await tester.pumpWidget(MyApp());
+  group('SignIn Widget Tests', () {
+    late MockSignInBloc signInBloc;
+    late MockNavigatorBloc navigatorBloc;
+    late MockSignInUseCase signInUseCase;
 
-    final emailTextField = find.byKey(Key('emailTextField'));
-    final passwordTextField = find.byKey(Key('passwordTextField'));
-    final signInButton = find.byKey(Key('signInButton'));
+    setUp(() {
+      signInBloc = MockSignInBloc();
+      navigatorBloc = MockNavigatorBloc();
+      signInUseCase = MockSignInUseCase();
+    });
 
+    tearDown(() {
+      signInBloc.close();
+      navigatorBloc.close();
+    });
 
-    expect(emailTextField, findsOneWidget);
-    expect(passwordTextField, findsOneWidget);
-    expect(signInButton, findsOneWidget);
+    testWidgets('Renders SignIn Screen', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: signInBloc),
+              BlocProvider.value(value: navigatorBloc),
+            ],
+            child: SignIn(),
+          ),
+        ),
+      );
 
+      expect(find.byKey(Key('EmailTextField')), findsOneWidget);
+      expect(find.byKey(Key('PasswordTextField')), findsOneWidget);
+      expect(find.byKey(Key('SignInButton')), findsOneWidget);
+      expect(find.byKey(Key('SignUpButton')), findsOneWidget);
+    });
 
-    await tester.enterText(emailTextField, 'test@example.com');
-    await tester.enterText(passwordTextField, 'testpassword');
+    testWidgets('Tapping SignIn', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: signInBloc),
+              BlocProvider.value(value: navigatorBloc),
+            ],
+            child: SignIn(),
+          ),
+        ),
+      );
 
+      when(signInUseCase.execute('losos@gmail.com', '1q2w3e4r5t')).thenAnswer((_) async => true);
 
-    await tester.tap(signInButton);
-    await tester.pump();
+      await tester.tap(find.byKey(Key('SignInButton')));
+      await tester.pump();
 
-
-    expect(find.text('Home'), findsOneWidget);
+      verify(signInBloc.add(SignInEvent('losos@gmail.com', '1q2w3e4r5t'))).called(1);
+    });
   });
-
 }
