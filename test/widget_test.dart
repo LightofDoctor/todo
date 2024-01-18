@@ -10,6 +10,7 @@ import 'package:mockito/mockito.dart';
 import 'package:todo/domain/bloc/navigator_bloc.dart';
 import 'package:todo/domain/bloc/read_data_users/read_data_users_bloc.dart';
 import 'package:todo/domain/bloc/sign_in/sign_in_bloc.dart';
+import 'package:todo/domain/bloc/sign_in/sign_in_events.dart';
 import 'package:todo/domain/bloc/sign_in/sign_in_state.dart';
 import 'package:todo/domain/usecase/read_questions_use_case.dart';
 
@@ -31,13 +32,16 @@ void main(){
   late QuestionListBloc questionListBloc;
   late ReadQuestionUseCase readQuestionUseCase;
   late SignInBloc signInBloc;
+  late SignInEvent signInEvent;
 
    setUp(() {
+
      readQuestionUseCase = MockReadQuestionUseCase();
      navigatorBloc = MockNavigatorBloc();
      signInUseCase = MockSignInUseCase();
      questionListBloc = QuestionListBloc(readQuestionUseCase: readQuestionUseCase);
      signInBloc = SignInBloc(navigatorBloc: navigatorBloc, signInUseCase: signInUseCase);
+     signInEvent = SignInEvent('', '');
      
    });
   testWidgets('Renders SignIn Screen', (WidgetTester tester) async {
@@ -65,7 +69,7 @@ void main(){
     expect(find.byKey(Key('SignInButton')), findsOneWidget);
     expect(find.byKey(Key('SignUpButton')), findsOneWidget);
   });
-  testWidgets('Tap on button', (WidgetTester tester) async {
+  testWidgets('Tap on SignUpbutton', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: MultiBlocProvider(
@@ -92,10 +96,35 @@ void main(){
 
 
   });
-
+  testWidgets('add Event to Sign_in', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider<SignInBloc>(
+              create: (context) => signInBloc,
+            ),
+            BlocProvider<NavigatorBloc>(
+              create: (context) => navigatorBloc,
+            ),
+            BlocProvider(
+                create: (context) => questionListBloc
+            )
+          ],
+          child: SignIn(),
+        ),
+      ),
+    );
+    await tester.enterText(find.byKey(Key('EmailTextField')), 'test@example.com');
+    await tester.enterText(find.byKey(Key('PasswordTextField')), 'password123');
+    await tester.tap(find.byKey(Key('SignInButton')));
+    await tester.pump();
+    verify(signInUseCase.execute(any, any)).called(1);
+  });
 
   tearDown(() {
     signInBloc.close();
     navigatorBloc.close();
   });
+
 }
