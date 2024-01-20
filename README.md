@@ -1,16 +1,13 @@
 # doctor_todo
 
-A new Flutter application with todos
+>screenshot of the output of a command or just attach a text of the output:
+>
+![Work1](https://github.com/LightofDoctor/todo/assets/48257431/491bd268-c9db-45c7-97a5-6d164317fba5)
+>screen recording
+>
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+https://github.com/LightofDoctor/todo/assets/48257431/1112dd8c-4f51-48ee-87a9-2575f7cbf05e
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

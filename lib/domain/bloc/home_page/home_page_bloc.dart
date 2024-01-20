@@ -1,38 +1,32 @@
 
-import 'package:bloc/bloc.dart';
-import 'package:todo/domain/bloc/home_page/home_page_states.dart';
-import 'package:todo/domain/usecase/delete_account_use_case.dart';
-import 'package:todo/domain/usecase/log_out_use_case.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/data/models/questions_model.dart';
 
+import '../../usecase/read_questions_use_case.dart';
 import '../navigator_bloc.dart';
 import 'home_page_events.dart';
+import 'home_page_states.dart';
 
-
-class HomePageBloc extends Bloc<UserEvent, UserStates>  {
+class HomePageBloc extends Bloc<HomePageEvents,HomePageStates>{
   NavigatorBloc navigatorBloc;
-  LogOutUseCase logOutUseCase;
-  DeleteAccountUseCase deleteAccountUseCase;
-  HomePageBloc({ required this.logOutUseCase, required this.navigatorBloc , required this.deleteAccountUseCase}) : super(HomePageLoadedState()){
-    emit(HomePageLoadedState());
-    on<LogOutEvent>((event, emit) async {
-      try{
-      final result =  await logOutUseCase.logOut();
-      result ? navigatorBloc.add(NavigateToSignIn()) : emit(ErrorLogOutState());
-    } catch (_) {
-      emit(ErrorLogOutState());
-    }
-    }
-    );
-    on<DeleteAccountEvent> ((event, emit) async {
-      try {
-        final result = await deleteAccountUseCase.delAccount();
-        result ? navigatorBloc.add(NavigateToSignIn()) : emit(
-            ErrorDeleteAccountState());
-      } catch (_) {
-        emit(ErrorDeleteAccountState());
-      }
-    }
-    );
+
+  HomePageBloc({ required this.navigatorBloc}): super (LoadedHomePageState()){
+    emit(LoadedHomePageState());
+
+
+    on<GoToSettingsEvent>((event, emit) {
+      navigatorBloc.add(NavigateToSettings());
+    });
+
+    on<CreateQuestionsEvent>((event, emit) {
+      navigatorBloc.add(NavigateToCreateQuestions());
+    });
+
+    on<GoToBackPageEvent>((event, emit) {
+      navigatorBloc.add(NavigateToSignIn());
+    });
+
   }
+
 
 }
